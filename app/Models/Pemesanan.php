@@ -15,6 +15,6 @@ class Pemesanan extends Model
 
     public function biodata()
     {
-        return $this->belongsTo(Biodata::class);
+        return $this->belongsTo(Biodata::class)->withTrashed();
     }
 }
