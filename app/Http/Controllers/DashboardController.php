@@ -77,4 +77,28 @@ class DashboardController extends Controller
         $pemesanan->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
+
+    public function checkIn()
+    {
+        return view('check-in');
+    }
+
+    public function checkInPost(Request $request)
+    {
+        $request->validate([
+            'id_tiket' => 'required'
+        ], [
+            'id_tiket.required' => 'ID Tiket tidak boleh kosong',
+        ]);
+
+        $pemesanan = Pemesanan::where('id_tiket', $request->id_tiket)->first();
+        if (!$pemesanan) {
+            return back()->with('error', 'Tiket tidak ditemukan');
+        }
+        if ($pemesanan->status == true) {
+            return back()->with('error', 'Tiket telah di gunakan sebelumnya');
+        }
+        $pemesanan->update(['status' => true]);
+        return back()->with('success', 'Tiket berhasil di gunakan');
+    }
 }

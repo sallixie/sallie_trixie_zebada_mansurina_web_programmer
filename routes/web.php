@@ -30,4 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/admin/get/{biodata}", [DashboardController::class, 'adminGet']);
     Route::put("/admin/edit/", [DashboardController::class, 'adminEdit']);
     Route::delete("/admin/delete/{pemesanan}", [DashboardController::class, 'adminDelete']);
+
+    Route::get("/check-in", [DashboardController::class, 'checkIn']);
+    Route::post("/check-in", [DashboardController::class, 'checkInPost']);
 });
