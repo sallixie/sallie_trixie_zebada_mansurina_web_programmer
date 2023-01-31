@@ -50,10 +50,6 @@
                     <div class="row">
                         <div class="col-lg-2 text-center text-left-sm hidden-xs order-lg-2">
                             <div class="bar__module">
-                                <a href="/">
-                                    <img class="logo-dark" alt="logo" src="/logo.png" />
-                                    <img class="logo-light" alt="logo" src="/logo.png" />
-                                </a>
                             </div>
                             <!--end module-->
                         </div>

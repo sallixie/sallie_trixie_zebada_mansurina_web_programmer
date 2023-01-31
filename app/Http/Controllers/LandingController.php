@@ -42,6 +42,8 @@ class LandingController extends Controller
             'biodata_id' => $biodata->id,
         ]);
 
+        return env("MAIL_FROM_ADDRESS");
+
         Mail::send('mail.tiket', ["biodata" => $biodata, "pemesanan" => $pemesanan], function ($message) use ($request) {
             $message->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"));
             $message->to($request->email, $request->nama);

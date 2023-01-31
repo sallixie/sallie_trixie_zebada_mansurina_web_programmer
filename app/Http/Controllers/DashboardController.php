@@ -10,7 +10,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $data["total"] = Pemesanan::all()->count();
+        $data["belum"] = Pemesanan::where("status", 0)->count();
+        $data["sudah"] = Pemesanan::where("status", 1)->count();
+        return view('dashboard', compact('data'));
     }
 
     public function admin()
