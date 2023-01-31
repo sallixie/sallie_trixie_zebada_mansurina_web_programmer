@@ -2,7 +2,7 @@
 @section('title', 'Dashboard')
 @section("content")
 
-@if(Auth::user()->role == 'user')
+@auth
 <div class="row">
   <div class="col-md-12">
     <!-- BEGIN Portlet -->
@@ -86,10 +86,10 @@
     <!-- END Portlet -->
   </div>
 </div>
-@endif
+@endauth
 
 @if(Auth::user()->role == 'user')
-<div class="row">
+{{-- <div class="row">
   <div class="col-md-12">
     <div class="portlet widget1">
       <div class="widget1-display bg-info text-white" style="min-height: unset">
@@ -125,74 +125,8 @@
       </div>
     </div>
   </div>
-</div>
-@endif
-
-{{-- <div class="row">
-  <div class="col-md-6 col-xl-12">
-    <div class="portlet portlet-primary">
-      <div class="portlet-header">
-        <div class="portlet-icon">
-          <i class="fa fa-clipboard-list"></i>
-        </div>
-        <h3 class="portlet-title">Antrian Peminjaman</h3>
-      </div>
-      <div class="portlet-body">
-        <div class="d-grid gap-2">
-
-          @if (count($antrian) == 0)
-          <div class="portlet mb-0">
-            <div class="portlet-body">
-              <div class="widget5">
-                <h4 class="widget5-title text-center mb-0">Tidak ada antrian</h4>
-              </div>
-            </div>
-          </div>
-          @endif
-
-          @isset($antrian)
-          @foreach ($antrian as $dt)
-          <div class="portlet mb-0">
-            <div class="portlet-body">
-              <div class="widget5">
-                <h4 class="widget5-title">{{ $dt->user->nama }}</h4>
-                <div class="widget5-group">
-                  <div class="widget5-item">
-                    <span class="widget5-info">Tanggal Peminjaman</span>
-                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_peminjaman)->translatedFormat('l, d M Y') }}</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Waktu Peminjaman</span>
-                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('H:i') }}</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Estimasi Pulang</span>
-                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('l, d M Y') }}</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Tujuan</span>
-                    <span class="widget5-value">{{ $dt->tujuan_peminjaman->nama }}</span>
-                  </div>
-                  @if(Auth::user()->role == 'admin')
-                  <div class="widget5-item">
-                    <span class="widget5-info">Hapus</span>
-                    <form action="/peminjaman/batal/{{ $dt->id }}" method="POST" class="form-admin-hapus">
-                      @csrf
-                      <button class="btn btn-danger w-50 btn-admin-hapus" type="button"><i class="fa-solid fa-trash"></i></button>
-                    </form>
-                  </div>
-                  @endif
-                </div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-          @endisset
-        </div>
-      </div>
-    </div>
-  </div>
 </div> --}}
+@endif
 
 @endsection
 

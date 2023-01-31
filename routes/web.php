@@ -25,4 +25,9 @@ Route::get("/logout", [AuthController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get("/dashboard", [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get("/admin", [DashboardController::class, 'admin']);
+    Route::get("/admin/get/{biodata}", [DashboardController::class, 'adminGet']);
+    Route::put("/admin/edit/", [DashboardController::class, 'adminEdit']);
+    Route::delete("/admin/delete/{pemesanan}", [DashboardController::class, 'adminDelete']);
 });
