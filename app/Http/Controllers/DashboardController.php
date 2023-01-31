@@ -78,9 +78,16 @@ class DashboardController extends Controller
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 
-    public function checkIn()
+    public function checkIn(Request $request)
     {
-        return view('check-in');
+        $pemesanan = null;
+        if ($request->id_tiket) {
+            $pemesanan = Pemesanan::where('id_tiket', $request->id_tiket)->first();
+            if (!$pemesanan) {
+                $pemesanan = 0;
+            }
+        }
+        return view('check-in', compact('pemesanan', 'request'));
     }
 
     public function checkInPost(Request $request)
