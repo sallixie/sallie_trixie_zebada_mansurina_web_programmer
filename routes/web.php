@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/check-in", [DashboardController::class, 'checkInPost']);
 
     Route::get("/laporan", [DashboardController::class, 'laporan']);
+});
+
+
+Route::get('/tes', function () {
+    Mail::send('mail.tiket', [], function ($message) {
+        $message->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"));
+        $message->to("sallieeky@gmail.com", "Sallie Eky");
+        $message->subject("Pemesanan Tiket AgenX");
+    });
+    return "ok";
 });
