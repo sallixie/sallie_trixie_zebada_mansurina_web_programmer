@@ -11,7 +11,7 @@
       <div class="widget10 widget10-vertical-md">
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["kendaraan"] }}</h2>
+            {{-- <h2 class="widget10-title">{{ $data["kendaraan"] }}</h2> --}}
             <span class="widget10-subtitle">Kendaraan Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -26,7 +26,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["driver"] }}</h2>
+            {{-- <h2 class="widget10-title">{{ $data["driver"] }}</h2> --}}
             <span class="widget10-subtitle">Driver Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -42,13 +42,13 @@
         <div class="widget10-item">
           <div class="widget10-content">
             <h2 class="widget10-title">
-              @if($data["status_peminjaman"] == null)
+              {{-- @if($data["status_peminjaman"] == null)
               Tidak Ada
               @elseif($data["status_peminjaman"] == "menunggu")
               Dalam Antrian
               @elseif($data["status_peminjaman"] == "dipakai")
               Dalam Peminjaman
-              @endif
+              @endif --}}
             </h2>
             <span class="widget10-subtitle">Status Peminjaman</span>
           </div>
@@ -66,7 +66,7 @@
           <div class="widget10-content">
             <h2 class="widget10-title">
               {{-- BELAKANGAN AJA --}}
-              {{ $data["status_reimburse"] ? $data["status_reimburse"]->status : "KOSONG" }}
+              {{-- {{ $data["status_reimburse"] ? $data["status_reimburse"]->status : "KOSONG" }} --}}
             </h2>
             <span class="widget10-subtitle">Status Reimburse</span>
           </div>
@@ -86,99 +86,9 @@
     <!-- END Portlet -->
   </div>
 </div>
-@else
-<div class="row">
-  <div class="col-md-12">
-    <!-- BEGIN Portlet -->
-    <div class="portlet">
-      <!-- BEGIN Widget -->
-      <div class="widget10 widget10-vertical-md">
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["kendaraan"] }}</h2>
-            <span class="widget10-subtitle">Kendaraan Tersedia</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-info avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa fa-car"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["driver"] }}</h2>
-            <span class="widget10-subtitle">Driver Tersedia</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-primary avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa fa-user"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["kendaraan_terpakai"] }}</h2>
-            <span class="widget10-subtitle">Kendaraan Terpakai</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-success avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa fa-car"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["driver_terpakai"] }}</h2>
-            <span class="widget10-subtitle">Driver Terpakai</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-danger avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa fa-user"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">{{ $data["konfirmasi_reimburse"] }}</h2>
-            <span class="widget10-subtitle">Reimburse Perlu Konfirmasi</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-secondary avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa-solid fa-gas-pump"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
-      </div>
-      <!-- END Widget -->
-    </div>
-    <!-- END Portlet -->
-  </div>
-</div>
 @endif
 
 @if(Auth::user()->role == 'user')
-@if($peminjaman)
-@if($peminjaman->status == 'dipakai')
 <div class="row">
   <div class="col-md-12">
     <div class="portlet widget1">
@@ -216,36 +126,9 @@
     </div>
   </div>
 </div>
-@elseif ($peminjaman->status == 'menunggu')
-<div class="row">
-  <div class="col-md-12">
-    <div class="portlet widget1">
-      <div class="widget1-display bg-secondary text-white" style="min-height: unset">
-        <div class="widget1-dialog" style="display: inline-block">
-          <div class="widget1-dialog-content widget1-dialog-content py-5">
-            <div class="row align-items-center">
-              <div class="col-md-8 mb-4">
-                <h5 class="mb-0">Status peminjaman anda <br><span class="h1">Dalam Antrian</span></h5>
-              </div>
-              <div class="col-md-4">
-                <h5 class="mb-3">Apabila ingin melakukan pembatalan peminjaman</h5>
-                <form action="/peminjaman/batal/{{ $peminjaman->id }}" method="POST" id="form-batal">
-                  @csrf
-                  <button type="button" class="btn btn-danger w-50" id="btn-batal">Batal</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-@endif
 @endif
 
-<div class="row">
+{{-- <div class="row">
   <div class="col-md-6 col-xl-12">
     <div class="portlet portlet-primary">
       <div class="portlet-header">
@@ -309,7 +192,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @endsection
 
@@ -327,7 +210,7 @@
 @endif
 
 
-<script>
+{{-- <script>
   $(document).ready(function () {
     $("#btn-batal").click(function () {
       Swal.fire({
@@ -378,5 +261,5 @@
     });
     
   });
-</script>
+</script> --}}
 @endsection

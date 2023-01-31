@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
+            $table->integer("biodata_id");
+            $table->string("id_tiket");
+            $table->boolean("status")->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

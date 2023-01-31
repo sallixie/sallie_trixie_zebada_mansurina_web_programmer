@@ -11,7 +11,7 @@
 	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
 	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>Login | SIMEKAR</title>
+	<title>Login</title>
 </head>
 
 <body class="preload-active">
@@ -32,16 +32,13 @@
 			<div class="content">
 				<div class="container-fluid g-4">
 					<div class="row g-0 align-items-center justify-content-center h-100" style="flex-direction: column">
-						<img src="/logo.png" alt="Logo JR" class="img-fluid" style="width: 150px">
-						<h3 class="text-center">Sistem Informasi Manajemen Kendaraan</h3>
+						<img src="/logo.png" alt="Logo Agen X" class="img-fluid" style="width: 150px">
+						<h3 class="text-center">Agen X</h3>
 
 						<div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
 							<!-- BEGIN Portlet -->
 							<div class="portlet">
 								<div class="portlet-body">
-									<div class="text-center mt-4 mb-5">
-										{{--  --}}
-									</div>
 									<!-- BEGIN Form -->
 									<form class="d-grid gap-3" id="login-form" method="POST" action="/login">
 										@csrf 
@@ -72,23 +69,7 @@
 											<!-- END Form Floating -->
 										</div>
 										<!-- END Validation Container -->
-										{{-- make remember me --}}
-										<div class="form-check mb-3">
-											<input class="form-check-input" type="checkbox" id="remember" name="remember_me" checked>
-											<label class="form-check-label" for="remember">Remember me</label>
-										</div>
-										<!-- BEGIN Flex -->
-										{{-- show error email atau password salah --}}
-										@if (session('error'))
-										<div class="alert alert-dismissible alert-outline-danger fade show">
-											<div class="alert-content">
-												{{ session('error') }}
-											</div>
-											<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-										</div>
-										@endif
 										<div class="d-flex align-items-center justify-content-between">
-											<span><a href="/lupa-password">Lupa password?</a></span>
 											<button type="submit" class="btn btn-label-primary btn-lg btn-widest" id="login-button">Login</button>
 										</div>
 										<!-- END Flex -->
@@ -118,12 +99,12 @@
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/sweet-alert.js"></script>
 
 	{{-- cek apakah ada session ubah_password --}}
-	@if(session('ubah_password'))
+	@if(session('message'))
 	<script>
 		swal.fire({
-			title: "Berhasil!",
-			text: "{{ session('ubah_password') }}",
-			icon: "success",
+			title: "Gagal!",
+			text: "{{ session('message') }}",
+			icon: "error",
 			confirmButtonColor: "#3085d6",
 			confirmButtonText: "Ok",
 		});
