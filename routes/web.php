@@ -33,4 +33,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("/check-in", [DashboardController::class, 'checkIn']);
     Route::post("/check-in", [DashboardController::class, 'checkInPost']);
+
+    Route::get("/laporan", [DashboardController::class, 'laporan']);
 });

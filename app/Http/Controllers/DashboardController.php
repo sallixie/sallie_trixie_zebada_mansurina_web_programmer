@@ -101,4 +101,10 @@ class DashboardController extends Controller
         $pemesanan->update(['status' => true]);
         return back()->with('success', 'Tiket berhasil di gunakan');
     }
+
+    public function laporan()
+    {
+        $pemesanan = Pemesanan::with("biodata")->orderBy('status', 'asc')->get();
+        return view('laporan', compact('pemesanan'));
+    }
 }
