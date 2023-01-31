@@ -40,7 +40,6 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
-            {{-- show id_tiket, nama, no_hp, email, alamat, status tiket --}}
             <div class="table-responsive">
               <table class="table table-striped table-bordered table-hover" id="table">
                 <thead>
